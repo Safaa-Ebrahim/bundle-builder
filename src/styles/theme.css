@@ -1,0 +1,44 @@
+/* ─── Design Tokens ──────────────────────────────────────────────────────────
+   Single source of truth for all brand colors, shadows, and typography.
+   All values here become Tailwind utility classes automatically (Tailwind v4).
+   ─────────────────────────────────────────────────────────────────────────── */
+
+@theme {
+  /* Typography */
+  --font-sans: "Sora", system-ui, sans-serif;
+
+  /* Brand */
+  --color-brand: #4e2fd2; /* core/wyze purple */
+  --color-brand-hover: #3f25ab;
+  --color-brand-bg: #edf4ff; /* card-bg */
+
+  /* Surfaces */
+  --color-bg: #ffffff;
+  --color-surface: #f0f4f7; /* Gray-C/50 */
+
+  /* Text */
+  --color-text-primary: #0b0d10; /* Gray-C/obsidian */
+  --color-text-secondary: #1f1f1fbf;
+  --color-text-muted: #484848;
+
+
+  --color-icon-muted: #6f7882; /* Gray-C/600 */
+  --color-text-tertiary: #525963; /* Gray-C/700 */
+  --color-link: #0000ee;
+
+  /* Borders */
+  --color-border: #e6ebf0; /* Gray-C/100 */
+  --color-border-secondary: #1f1f1f; /* Gray-C/100 */
+  --color-border-strong: #ced6de; /* Gray-C/200 */
+  --color-border-selected: var(--color-brand);
+
+  /* Status */
+  --color-success: #16a34a;
+  --color-sale: #d8392b;
+  --color-badge-bg: #0b0d10;
+  --color-badge-text: #ffffff;
+
+  /* Shadows */
+  --shadow-card:
+    0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
