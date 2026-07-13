@@ -1,10 +1,8 @@
-import React from "react"
+import Bundle from './components/page/bundle'
 
 function App() {
   return (
-    <>
-     
-    </>
+    <Bundle />
   )
 }
 
