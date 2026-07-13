@@ -198,7 +198,7 @@
           "id": "cam-unlimited-default",
           "label": null,
           "swatch": null,
-          "image": "/img/cam-unlimited.png",
+          "image": "/img/cam-unlimited.svg",
           "price": 9.99,
           "defaultQty": 1,
           "stock": null
