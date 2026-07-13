@@ -2,8 +2,9 @@ import React from 'react'
 import BuilderStep from './components/BuilderStep'
 
 const Builder = ({ data, bundle }) => {
-  const { steps, products } = data
+  const { steps } = data
   const {
+    products,
     openStep,
     activeVariant,
     quantities,
