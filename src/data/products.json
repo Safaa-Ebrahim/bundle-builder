@@ -1,0 +1,165 @@
+{
+  "steps": [
+    {
+      "id": "cameras",
+      "stepNumber": 1,
+      "title": "Choose your cameras",
+      "icon": "camera",
+      "productIds": [
+        "wyze-cam-v4",
+        "wyze-cam-pan-v3",
+        "wyze-floodlight-v2",
+        "wyze-doorbell",
+        "wyze-battery-cam-pro"
+      ]
+    },
+    {
+      "id": "plan",
+      "stepNumber": 2,
+      "title": "Choose your plan",
+      "icon": "shield",
+      "productIds": ["cam-unlimited"]
+    },
+    {
+      "id": "sensors",
+      "stepNumber": 3,
+      "title": "Choose your sensors",
+      "icon": "sensor",
+      "productIds": ["motion-sensor", "sense-hub"]
+    },
+    {
+      "id": "protection",
+      "stepNumber": 4,
+      "title": "Add extra protection",
+      "icon": "protection",
+      "productIds": ["microsd-256"]
+    }
+  ],
+
+  "products": [
+    {
+      "id": "wyze-cam-v4",
+      "category": "Cameras",
+      "title": "Wyze Cam v4",
+      "description": "The clearest Wyze Cam ever made.",
+      "learnMoreUrl": "#",
+      "badge": { "label": "Save 22%" },
+      "variants": [
+        { "id": "wyze-cam-v4-white", "label": "White", "swatch": "#f2f2f2", "image": "/img/cam-v4.png", "compareAtPrice": 35.98, "price": 27.98, "defaultQty": 1 },
+        { "id": "wyze-cam-v4-grey",  "label": "Grey",  "swatch": "#8a8a8a", "image": "/img/cam-v4.png", "compareAtPrice": 35.98, "price": 27.98, "defaultQty": 0 },
+        { "id": "wyze-cam-v4-black", "label": "Black", "swatch": "#1c1c1c", "image": "/img/cam-v4.png", "compareAtPrice": 35.98, "price": 27.98, "defaultQty": 0 }
+      ]
+    },
+    {
+      "id": "wyze-cam-pan-v3",
+      "category": "Cameras",
+      "title": "Wyze Cam Pan v3",
+      "description": "360\u00b0 pan and 180\u00b0 tilt security camera.",
+      "learnMoreUrl": "#",
+      "badge": { "label": "Save 12%" },
+      "variants": [
+        { "id": "wyze-cam-pan-v3-white", "label": "White", "swatch": "#f2f2f2", "image": "/img/cam-pan-v3.png", "compareAtPrice": 39.98, "price": 34.98, "defaultQty": 2 },
+        { "id": "wyze-cam-pan-v3-black", "label": "Black", "swatch": "#1c1c1c", "image": "/img/cam-pan-v3.png", "compareAtPrice": 39.98, "price": 34.98, "defaultQty": 0 }
+      ]
+    },
+    {
+      "id": "wyze-floodlight-v2",
+      "category": "Cameras",
+      "title": "Wyze Cam Floodlight v2",
+      "description": "2K floodlight camera with a 160\u00b0 wide-angle view for your garage.",
+      "learnMoreUrl": "#",
+      "badge": { "label": "Save 22%" },
+      "variants": [
+        { "id": "wyze-floodlight-v2-white", "label": "White", "swatch": "#f2f2f2", "image": "/img/floodlight-v2.png", "compareAtPrice": 89.98, "price": 69.98, "defaultQty": 0 },
+        { "id": "wyze-floodlight-v2-black", "label": "Black", "swatch": "#1c1c1c", "image": "/img/floodlight-v2.png", "compareAtPrice": 89.98, "price": 69.98, "defaultQty": 0 }
+      ]
+    },
+    {
+      "id": "wyze-doorbell",
+      "category": "Cameras",
+      "title": "Wyze Duo Cam Doorbell",
+      "description": "Two cameras. Two views. Double the porch protection.",
+      "learnMoreUrl": "#",
+      "badge": null,
+      "variants": [
+        { "id": "wyze-doorbell-default", "label": null, "swatch": null, "image": "/img/doorbell.png", "compareAtPrice": 69.98, "price": 69.98, "defaultQty": 0 }
+      ]
+    },
+    {
+      "id": "wyze-battery-cam-pro",
+      "category": "Cameras",
+      "title": "Wyze Battery Cam Pro",
+      "description": "Protect anywhere. See everything in 2.5K HDR. No power outlet or electrician needed.",
+      "learnMoreUrl": "#",
+      "badge": null,
+      "variants": [
+        { "id": "wyze-battery-cam-pro-white", "label": "White", "swatch": "#f2f2f2", "image": "/img/battery-cam-pro.png", "compareAtPrice": 89.98, "price": 89.98, "defaultQty": 0 },
+        { "id": "wyze-battery-cam-pro-black", "label": "Black", "swatch": "#1c1c1c", "image": "/img/battery-cam-pro.png", "compareAtPrice": 89.98, "price": 89.98, "defaultQty": 0 }
+      ]
+    },
+
+    {
+      "id": "cam-unlimited",
+      "category": "Plan",
+      "title": "Cam Unlimited",
+      "description": "Unlimited cloud storage for every camera on your account.",
+      "learnMoreUrl": "#",
+      "badge": null,
+      "billingSuffix": "/mo",
+      "variants": [
+        { "id": "cam-unlimited-default", "label": null, "swatch": null, "image": "/img/cam-unlimited.png", "compareAtPrice": 12.99, "price": 9.99, "defaultQty": 1 }
+      ]
+    },
+
+    {
+      "id": "motion-sensor",
+      "category": "Sensors",
+      "title": "Wyze Sense Motion Sensor",
+      "description": "Detects motion and triggers your cameras or alarm.",
+      "learnMoreUrl": "#",
+      "badge": null,
+      "variants": [
+        { "id": "motion-sensor-default", "label": null, "swatch": null, "image": "/img/motion-sensor.png", "compareAtPrice": 29.99, "price": 29.99, "defaultQty": 2 }
+      ]
+    },
+    {
+      "id": "sense-hub",
+      "category": "Sensors",
+      "title": "Wyze Sense Hub (Required)",
+      "description": "Connects all your Wyze Sense sensors to the app.",
+      "learnMoreUrl": "#",
+      "badge": null,
+      "variants": [
+        { "id": "sense-hub-default", "label": null, "swatch": null, "image": "/img/sense-hub.png", "compareAtPrice": 29.92, "price": 0, "defaultQty": 1 }
+      ]
+    },
+
+    {
+      "id": "microsd-256",
+      "category": "Accessories",
+      "title": "Wyze MicroSD Card (256GB)",
+      "description": "Local backup storage for your cameras.",
+      "learnMoreUrl": "#",
+      "badge": null,
+      "variants": [
+        { "id": "microsd-256-default", "label": null, "swatch": null, "image": "/img/microsd-256.png", "compareAtPrice": 20.98, "price": 20.98, "defaultQty": 2 }
+      ]
+    }
+  ],
+
+  "shipping": {
+    "label": "Fast Shipping",
+    "compareAtPrice": 5.99,
+    "price": 0
+  },
+
+  "guarantee": {
+    "badgeLabel": "100% Satisfaction Guarantee",
+    "title": "30-day hassle-free returns",
+    "description": "If you're not totally in love with the product, we will refund you 100%."
+  },
+
+  "financing": {
+    "label": "as low as $19.19/mo"
+  }
+}
