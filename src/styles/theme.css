@@ -18,8 +18,9 @@
 
   /* Text */
   --color-text-primary: #0b0d10; /* Gray-C/obsidian */
-  --color-text-secondary: #1f1f1fbf;
+  --color-text-secondary: #1f1f1f;
   --color-text-muted: #484848;
+  --color-price: #575757;
 
 
   --color-icon-muted: #6f7882; /* Gray-C/600 */
@@ -37,6 +38,10 @@
   --color-sale: #d8392b;
   --color-badge-bg: #0b0d10;
   --color-badge-text: #ffffff;
+
+  /* Variant selector */
+  --color-variant-selected-border: #0aa288;
+  --color-variant-selected-bg: #1df0bb0a;
 
   /* Shadows */
   --shadow-card:
