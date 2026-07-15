@@ -38,6 +38,7 @@ export default function Review({ data, bundle }) {
                       variant={variant}
                       qty={qty}
                       onSetQty={setQty}
+                      showQuantity={category !== 'Plan'}
                     />
                   ))}
                 </div>
