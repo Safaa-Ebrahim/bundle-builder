@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react'
-import { loadSavedSystem, saveSystem } from '../utils/storage'
+import { loadSavedSystem, saveSystem, clearSavedSystem } from '../utils/storage'
 import { getAllProducts } from '../utils/catalog'
 import {
   buildReviewLines,
@@ -41,6 +41,7 @@ export function useBundle(data) {
 
   const [openStep, setOpenStep] = useState(data.steps[0]?.id ?? null)
   const [savedNotice, setSavedNotice] = useState(false)
+  const [checkedOut, setCheckedOut] = useState(false)
 
   const setQty = (variantId, qty) => {
     setState((prev) => ({
@@ -72,6 +73,14 @@ export function useBundle(data) {
     setTimeout(() => setSavedNotice(false), 2500)
   }
 
+  const checkout = () => {
+    clearSavedSystem()
+    setState(seedState(products))
+    setOpenStep(data.steps[0]?.id ?? null)
+    setCheckedOut(true)
+    setTimeout(() => setCheckedOut(false), 3000)
+  }
+
   const reviewLines = useMemo(
     () => buildReviewLines(products, quantities),
     [products, quantities],
@@ -93,6 +102,7 @@ export function useBundle(data) {
     activeVariant,
     openStep,
     savedNotice,
+    checkedOut,
     reviewLines,
     groupedLines,
     totals,
@@ -101,6 +111,7 @@ export function useBundle(data) {
     toggleStep,
     goToNextStep,
     saveForLater,
+    checkout,
     stepSelectedCount,
   }
 }
