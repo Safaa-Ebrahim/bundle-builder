@@ -1,4 +1,5 @@
 import { FaCaretDown } from 'react-icons/fa'
+import { FiPackage } from 'react-icons/fi'
 import ProductCard from './ProductCard'
 import { STEP_ICONS } from '../../../../../config/stepIcons'
 
@@ -51,19 +52,30 @@ export default function BuilderStep({
 
       {isOpen && (
         <div className='px-4 pb-5 pt-3 flex flex-col gap-3'>
-          <div className=" grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-5 gap-3">
-            {products.map((product) => (
-              <ProductCard
-                key={product.id}
-                product={product}
-                activeVariantId={activeVariant[product.id]}
-                quantities={quantities}
-                onSelectVariant={onSelectVariant}
-                onSetQty={onSetQty}
-                showQuantity={step.id !== 'plan'}
-              />
-            ))}
-          </div>
+          {products?.length === 0 ? (
+            <div className="flex flex-col items-center gap-3 py-10">
+              <div className="w-14 h-14 rounded-full bg-white flex items-center justify-center shadow-card">
+                <FiPackage className="w-6 h-6 text-brand" />
+              </div>
+              <span className="text-sm text-text-secondary text-center">
+                No options available for this step right now.
+              </span>
+            </div>
+          ) : (
+            <div className=" grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-5 gap-3">
+              {products.map((product) => (
+                <ProductCard
+                  key={product.id}
+                  product={product}
+                  activeVariantId={activeVariant[product.id]}
+                  quantities={quantities}
+                  onSelectVariant={onSelectVariant}
+                  onSetQty={onSetQty}
+                  showQuantity={step.id !== 'plan'}
+                />
+              ))}
+            </div>
+          )}
           {!isLast && (
             <button
               type="button"
