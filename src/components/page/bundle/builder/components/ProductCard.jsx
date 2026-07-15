@@ -57,7 +57,7 @@ export default function ProductCard({ product, activeVariantId, quantities, onSe
                 {formatPrice(activeVariant.price)}
               </p>
             )}
-            <p className="text-price">
+            <p className="text-charcoal-gray">
               {priceAfterDiscount === 0 ? 'FREE' : formatPrice(priceAfterDiscount)}
               {product.billingSuffix}
             </p>
