@@ -24,20 +24,32 @@ function seedState(products) {
   return { quantities, activeVariant }
 }
 
+function defaultShippingOptionId(shippingOptions) {
+  return (shippingOptions.find((o) => o.isDefault) ?? shippingOptions[0])?.id ?? null
+}
+
 export function useBundle(data) {
   const products = useMemo(() => getAllProducts(data), [data])
+  const shippingOptions = data.shippingOptions ?? []
+
+  // Read localStorage once; both initializers below reuse this instead of
+  // each parsing the same saved blob independently.
+  const savedOnMount = useMemo(() => loadSavedSystem(), [])
 
   const [{ quantities, activeVariant }, setState] = useState(() => {
     const seeded = seedState(products)
-    const saved = loadSavedSystem()
-    if (saved) {
+    if (savedOnMount) {
       return {
-        quantities: { ...seeded.quantities, ...saved.quantities },
-        activeVariant: { ...seeded.activeVariant, ...saved.activeVariant },
+        quantities: { ...seeded.quantities, ...savedOnMount.quantities },
+        activeVariant: { ...seeded.activeVariant, ...savedOnMount.activeVariant },
       }
     }
     return seeded
   })
+
+  const [selectedShippingId, setSelectedShippingId] = useState(
+    () => savedOnMount?.selectedShippingId ?? defaultShippingOptionId(shippingOptions),
+  )
 
   const [openStep, setOpenStep] = useState(data.steps[0]?.id ?? null)
   const [savedNotice, setSavedNotice] = useState(false)
@@ -67,8 +79,12 @@ export function useBundle(data) {
     if (next) setOpenStep(next.id)
   }
 
+  const selectShippingOption = (id) => {
+    setSelectedShippingId(id)
+  }
+
   const saveForLater = () => {
-    saveSystem({ quantities, activeVariant })
+    saveSystem({ quantities, activeVariant, selectedShippingId })
     setSavedNotice(true)
     setTimeout(() => setSavedNotice(false), 2500)
   }
@@ -76,10 +92,14 @@ export function useBundle(data) {
   const checkout = () => {
     clearSavedSystem()
     setState(seedState(products))
+    setSelectedShippingId(defaultShippingOptionId(shippingOptions))
     setOpenStep(data.steps[0]?.id ?? null)
     setCheckedOut(true)
     setTimeout(() => setCheckedOut(false), 3000)
   }
+
+  const selectedShipping =
+    shippingOptions.find((o) => o.id === selectedShippingId) ?? shippingOptions[0] ?? null
 
   const reviewLines = useMemo(
     () => buildReviewLines(products, quantities),
@@ -89,8 +109,8 @@ export function useBundle(data) {
   const groupedLines = useMemo(() => groupLinesByCategory(reviewLines), [reviewLines])
 
   const totals = useMemo(
-    () => computeTotals(reviewLines, data.shipping),
-    [reviewLines, data.shipping],
+    () => computeTotals(reviewLines, selectedShipping),
+    [reviewLines, selectedShipping],
   )
 
   const stepSelectedCount = (step) =>
@@ -106,12 +126,16 @@ export function useBundle(data) {
     reviewLines,
     groupedLines,
     totals,
+    shippingOptions,
+    selectedShippingId,
+    selectedShipping,
     setQty,
     selectVariant,
     toggleStep,
     goToNextStep,
     saveForLater,
     checkout,
+    selectShippingOption,
     stepSelectedCount,
   }
 }

@@ -195,6 +195,7 @@
       "billingSuffix": "/mo",
       "transparentImage": true,
       "highlightTitle": true,
+      "singleSelect": true,
       "variants": [
         {
           "id": "cam-unlimited-default",
@@ -269,10 +270,18 @@
       ]
     }
   ],
-  "shipping": {
-    "label": "Fast Shipping",
-    "price": 5.99,
-    "discount": 100,
-    "image": "img/carbon_delivery.svg"
+  "shippingOptions": [
+    {
+      "id": "fast-shipping",
+      "label": "Fast Shipping",
+      "price": 5.99,
+      "discount": 100,
+      "image": "img/carbon_delivery.svg",
+      "isDefault": true,
+      "sortOrder": 0
+    }
+  ],
+  "financing": {
+    "months": 12
   }
 }

@@ -1,13 +1,13 @@
 import ProductImage from '../../../shared/ProductImage'
 import QuantityStepper from '../../../shared/QuantityStepper'
-import { formatPrice, getPriceAfterDiscount } from '../../../../utils/pricing'
+import { formatPrice, getSaleInfo } from '../../../../utils/pricing'
+import { splitHighlightTitle } from '../../../../utils/text'
 
 export default function ReviewLineItem({ product, variant, qty, onSetQty, showQuantity = true }) {
-  const priceAfterDiscount = getPriceAfterDiscount(variant.price, product.discount)
+  const { finalPrice: priceAfterDiscount, onSale } = getSaleInfo(variant.price, product.discount)
   const lineTotal = priceAfterDiscount * qty
   const compareAtTotal = variant.price * qty
-  const onSale = priceAfterDiscount < variant.price
-  const [firstWord, ...restWords] = product.title.split(' ')
+  const [firstWord, restWords] = splitHighlightTitle(product.title)
 
   return (
     <div className="flex items-center gap-3">
@@ -22,7 +22,7 @@ export default function ReviewLineItem({ product, variant, qty, onSetQty, showQu
           {product?.highlightTitle ? (
             <>
               <span className="font-bold text-text-primary">{firstWord}</span>{' '}
-              <span className="font-bold text-brand">{restWords.join(' ')}</span>
+              <span className="font-bold text-brand">{restWords}</span>
             </>
           ) : (
             product?.title
