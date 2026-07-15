@@ -269,10 +269,15 @@
       ]
     }
   ],
-  "shipping": {
-    "label": "Fast Shipping",
-    "price": 5.99,
-    "discount": 100,
-    "image": "img/carbon_delivery.svg"
-  }
+  "shippingOptions": [
+    {
+      "id": "fast-shipping",
+      "label": "Fast Shipping",
+      "price": 5.99,
+      "discount": 100,
+      "image": "img/carbon_delivery.svg",
+      "isDefault": true,
+      "sortOrder": 0
+    }
+  ]
 }
