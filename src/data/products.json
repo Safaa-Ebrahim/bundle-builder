@@ -191,7 +191,7 @@
       "title": "Cam Unlimited",
       "description": "Unlimited cloud storage for every camera on your account.",
       "learnMoreUrl": "#",
-      "discount": null,
+      "discount": 24,
       "billingSuffix": "/mo",
       "variants": [
         {
@@ -199,7 +199,7 @@
           "label": null,
           "swatch": null,
           "image": "/img/cam-unlimited.svg",
-          "price": 9.99,
+          "price": 12.99,
           "defaultQty": 1,
           "stock": null
         }
