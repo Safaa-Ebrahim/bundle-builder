@@ -55,6 +55,7 @@ async function fetchFromSupabase() {
     billingSuffix: p.billing_suffix,
     transparentImage: p.transparent_image,
     highlightTitle: p.highlight_title,
+    singleSelect: p.single_select,
     variants: variantsByProductId.get(p.id) ?? [],
   }))
 
