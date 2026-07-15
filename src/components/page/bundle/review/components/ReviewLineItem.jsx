@@ -2,7 +2,7 @@ import ProductImage from '../../../../shared/ProductImage'
 import QuantityStepper from '../../../../shared/QuantityStepper'
 import { formatPrice, getPriceAfterDiscount } from '../../../../../utils/pricing'
 
-export default function ReviewLineItem({ product, variant, qty, onSetQty }) {
+export default function ReviewLineItem({ product, variant, qty, onSetQty, showQuantity = true }) {
   const priceAfterDiscount = getPriceAfterDiscount(variant.price, product.discount)
   const lineTotal = priceAfterDiscount * qty
   const compareAtTotal = variant.price * qty
@@ -17,12 +17,14 @@ export default function ReviewLineItem({ product, variant, qty, onSetQty }) {
           {variant.label ? ` (${variant.label})` : ''}
         </div>
       </div>
-      <QuantityStepper
-        qty={qty}
-        max={variant.stock}
-        onChange={(next) => onSetQty(variant.id, next)}
-        className='bg-white text-charcoal-gray'
-      />
+      {showQuantity && (
+        <QuantityStepper
+          qty={qty}
+          max={variant.stock}
+          onChange={(next) => onSetQty(variant.id, next)}
+          className='bg-white text-charcoal-gray'
+        />
+      )}
       <div className="text-right flex flex-col xl:flex-row xl:gap-2.5">
         {onSale && (
           <div className="text-xs lg:text-sm xl:text-base text-icon-muted line-through font-medium">{formatPrice(compareAtTotal)}</div>
