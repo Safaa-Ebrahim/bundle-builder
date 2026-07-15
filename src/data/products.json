@@ -274,8 +274,5 @@
     "price": 5.99,
     "discount": 100,
     "image": "img/carbon_delivery.svg"
-  },
-  "financing": {
-    "label": "as low as $19.19/mo"
   }
 }
