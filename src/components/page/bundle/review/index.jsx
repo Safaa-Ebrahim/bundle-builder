@@ -1,13 +1,14 @@
 import { useState } from 'react'
 import ReviewLineItem from './components/ReviewLineItem'
-import { formatPrice } from '../../../../utils/pricing'
+import { formatPrice, getMonthlyFinancingEstimate } from '../../../../utils/pricing'
 import badge from '../../../../assets/satisfaction_badge.svg'
 const CATEGORY_ORDER = ['Cameras', 'Sensors', 'Accessories', 'Plan']
 
 export default function Review({ data, bundle }) {
   const { groupedLines, totals, setQty, saveForLater, savedNotice } = bundle
-  const { shipping, financing } = data
+  const { shipping } = data
   const [checkedOut, setCheckedOut] = useState(false)
+  const monthlyEstimate = getMonthlyFinancingEstimate(totals?.activeTotal)
 
   return (
     <div className="rounded-[10px] bg-brand-bg p-5 xl:p-10 text-left">
@@ -75,7 +76,7 @@ export default function Review({ data, bundle }) {
 
             <div className="flex flex-col gap-2 xl:flex-row xl:justify-between items-end xl:items-start xl:w-full">
               <span className="w-fit text-xs xl:text-base font-medium bg-brand text-white rounded px-2 py-1">
-                {financing.label}
+                as low as {formatPrice(monthlyEstimate)}/mo
               </span>
               <div className="flex items-baseline gap-2">
                 <span className="text-icon-muted line-through text-lg xl:text-xl font-medium">
