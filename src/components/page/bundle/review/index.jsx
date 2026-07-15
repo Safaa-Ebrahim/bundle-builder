@@ -1,4 +1,6 @@
+import { useState } from 'react'
 import ReviewLineItem from './components/ReviewLineItem'
+import ConfirmDialog from '../../../shared/ConfirmDialog'
 import { formatPrice, getMonthlyFinancingEstimate } from '../../../../utils/pricing'
 import badge from '../../../../assets/satisfaction_badge.svg'
 const CATEGORY_ORDER = ['Cameras', 'Sensors', 'Accessories', 'Plan']
@@ -7,6 +9,7 @@ export default function Review({ data, bundle }) {
   const { groupedLines, totals, setQty, saveForLater, savedNotice, checkout, checkedOut } = bundle
   const { shipping } = data
   const monthlyEstimate = getMonthlyFinancingEstimate(totals?.activeTotal)
+  const [confirmingCheckout, setConfirmingCheckout] = useState(false)
 
   return (
     <div className="rounded-[10px] bg-brand-bg p-5 xl:p-10 text-left">
@@ -99,7 +102,7 @@ export default function Review({ data, bundle }) {
             )}
             <button
               type="button"
-              onClick={checkout}
+              onClick={() => setConfirmingCheckout(true)}
               className="w-full py-3 rounded-lg bg-brand text-white font-bold hover:bg-brand-hover transition-colors"
             >
               {checkedOut ? 'Order placed! 🎉' : 'Checkout'}
@@ -116,6 +119,19 @@ export default function Review({ data, bundle }) {
         </div>
 
       </div>
+
+      <ConfirmDialog
+        open={confirmingCheckout}
+        title="Confirm checkout"
+        description="Are you sure you want to check out with this system? This will clear your saved configuration and start a new one."
+        confirmLabel="Checkout"
+        cancelLabel="Cancel"
+        onCancel={() => setConfirmingCheckout(false)}
+        onConfirm={() => {
+          setConfirmingCheckout(false)
+          checkout()
+        }}
+      />
     </div>
   )
 }
