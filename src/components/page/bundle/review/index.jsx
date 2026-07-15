@@ -10,10 +10,10 @@ export default function Review({ data, bundle }) {
   const [checkedOut, setCheckedOut] = useState(false)
 
   return (
-    <div className="rounded-[10px] bg-brand-bg p-5 sm:p-6 text-left">
+    <div className="rounded-[10px] bg-brand-bg p-5 xl:p-10 text-left">
       <div className="text-xs uppercase tracking-wide text-text-muted xl:hidden">Review</div>
 
-      <div className='flex flex-col xl:flex-row gap-3 xl:gap-12'>
+      <div className='flex flex-col xl:flex-row gap-3 xl:gap-12 xl:justify-between'>
         <div className='flex flex-col gap-2.5'>
           {/* title, discription */}
           <div className="flex flex-col gap-1">
