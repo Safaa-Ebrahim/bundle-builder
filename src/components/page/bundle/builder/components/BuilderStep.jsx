@@ -60,6 +60,7 @@ export default function BuilderStep({
                 quantities={quantities}
                 onSelectVariant={onSelectVariant}
                 onSetQty={onSetQty}
+                showQuantity={step.id !== 'plan'}
               />
             ))}
           </div>
