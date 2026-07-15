@@ -3,7 +3,14 @@ import VariantSelector from './VariantSelector'
 import QuantityStepper from '../../../../shared/QuantityStepper'
 import { formatPrice, getPriceAfterDiscount } from '../../../../../utils/pricing'
 
-export default function ProductCard({ product, activeVariantId, quantities, onSelectVariant, onSetQty }) {
+export default function ProductCard({
+  product,
+  activeVariantId,
+  quantities,
+  onSelectVariant,
+  onSetQty,
+  showQuantity = true,
+}) {
   const activeVariant =
     product.variants.find((v) => v.id === activeVariantId) ?? product.variants[0]
   const qty = quantities[activeVariant.id] ?? 0
@@ -46,11 +53,25 @@ export default function ProductCard({ product, activeVariantId, quantities, onSe
         />
         {/* quantity, price */}
         <div className="flex items-center justify-between gap-2">
-          <QuantityStepper
-            qty={qty}
-            max={activeVariant.stock}
-            onChange={(next) => onSetQty(activeVariant.id, next)}
-          />
+          {showQuantity ? (
+            <QuantityStepper
+              qty={qty}
+              max={activeVariant.stock}
+              onChange={(next) => onSetQty(activeVariant.id, next)}
+            />
+          ) : (
+            <button
+              type="button"
+              onClick={() => onSetQty(activeVariant.id, selected ? 0 : 1)}
+              className={`px-4 py-1.5 rounded-md text-sm font-semibold transition-colors ${
+                selected
+                  ? 'bg-brand text-white'
+                  : 'bg-surface text-text-primary hover:border-brand border border-border'
+              }`}
+            >
+              {selected ? 'Selected' : 'Select'}
+            </button>
+          )}
           <div className="text-right">
             {onSale && (
               <p className="text-sale line-through">
