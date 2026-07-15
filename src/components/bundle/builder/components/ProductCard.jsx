@@ -1,7 +1,7 @@
-import ProductImage from '../../../../shared/ProductImage'
+import ProductImage from '../../../shared/ProductImage'
 import VariantSelector from './VariantSelector'
-import QuantityStepper from '../../../../shared/QuantityStepper'
-import { formatPrice, getPriceAfterDiscount } from '../../../../../utils/pricing'
+import QuantityStepper from '../../../shared/QuantityStepper'
+import { formatPrice, getPriceAfterDiscount } from '../../../../utils/pricing'
 
 export default function ProductCard({
   product,

@@ -1,6 +1,6 @@
-import ProductImage from '../../../../shared/ProductImage'
-import QuantityStepper from '../../../../shared/QuantityStepper'
-import { formatPrice, getPriceAfterDiscount } from '../../../../../utils/pricing'
+import ProductImage from '../../../shared/ProductImage'
+import QuantityStepper from '../../../shared/QuantityStepper'
+import { formatPrice, getPriceAfterDiscount } from '../../../../utils/pricing'
 
 export default function ReviewLineItem({ product, variant, qty, onSetQty, showQuantity = true }) {
   const priceAfterDiscount = getPriceAfterDiscount(variant.price, product.discount)

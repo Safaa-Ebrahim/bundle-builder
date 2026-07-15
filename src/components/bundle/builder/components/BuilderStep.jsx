@@ -1,7 +1,7 @@
 import { FaCaretDown } from 'react-icons/fa'
 import { FiPackage } from 'react-icons/fi'
 import ProductCard from './ProductCard'
-import { STEP_ICONS } from '../../../../../config/stepIcons'
+import { STEP_ICONS } from '../../../../config/stepIcons'
 
 export default function BuilderStep({
   step,

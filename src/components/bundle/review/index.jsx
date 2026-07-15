@@ -1,9 +1,9 @@
 import { useState } from 'react'
 import { FiShoppingCart } from 'react-icons/fi'
 import ReviewLineItem from './components/ReviewLineItem'
-import ConfirmDialog from '../../../shared/ConfirmDialog'
-import Toast from '../../../shared/Toast'
-import { formatPrice, getMonthlyFinancingEstimate } from '../../../../utils/pricing'
+import ConfirmDialog from '../../shared/ConfirmDialog'
+import Toast from '../../shared/Toast'
+import { formatPrice, getMonthlyFinancingEstimate } from '../../../utils/pricing'
 import badge from '../../../../assets/satisfaction_badge.svg'
 const CATEGORY_ORDER = ['Cameras', 'Sensors', 'Accessories', 'Plan']
 

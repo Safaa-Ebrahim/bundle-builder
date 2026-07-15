@@ -1,4 +1,4 @@
-import Bundle from './components/page/bundle'
+import Bundle from './components/bundle'
 
 function App() {
   return (

@@ -1,6 +1,6 @@
 import React from 'react'
-import data from '../../../data/products.json'
-import { useBundle } from '../../../hooks/useBundle'
+import data from '../../data/products.json'
+import { useBundle } from '../../hooks/useBundle'
 import Builder from './builder'
 import ReviewPanel from './review'
 
