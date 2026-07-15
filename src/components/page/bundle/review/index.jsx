@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { FiShoppingCart } from 'react-icons/fi'
 import ReviewLineItem from './components/ReviewLineItem'
 import ConfirmDialog from '../../../shared/ConfirmDialog'
 import { formatPrice, getMonthlyFinancingEstimate } from '../../../../utils/pricing'
@@ -6,10 +7,39 @@ import badge from '../../../../assets/satisfaction_badge.svg'
 const CATEGORY_ORDER = ['Cameras', 'Sensors', 'Accessories', 'Plan']
 
 export default function Review({ data, bundle }) {
-  const { groupedLines, totals, setQty, saveForLater, savedNotice, checkout, checkedOut } = bundle
+  const { groupedLines, reviewLines, totals, setQty, saveForLater, savedNotice, checkout, checkedOut } =
+    bundle
   const { shipping } = data
   const monthlyEstimate = getMonthlyFinancingEstimate(totals?.activeTotal)
   const [confirmingCheckout, setConfirmingCheckout] = useState(false)
+  const isEmpty = reviewLines.length === 0
+
+  if (isEmpty) {
+    return (
+      <div className="rounded-[10px] bg-brand-bg p-5 xl:p-10 text-left">
+        <div className="text-xs uppercase tracking-wide text-text-muted xl:hidden">Review</div>
+
+        <div className="flex flex-col gap-1">
+          <h2 className="text-xl xl:text-2xl font-semibold text-text-secondary">Your security system</h2>
+          <p className="text-xs lg:text-s xl:text-base text-text-secondary/75">
+            Review your personalized protection system designed to keep what matters most safe.
+          </p>
+        </div>
+
+        <div className="flex flex-col items-center gap-4 py-14 mt-3 border-t border-border-strong">
+          <div className="w-16 h-16 rounded-full bg-white flex items-center justify-center shadow-card">
+            <FiShoppingCart className="w-7 h-7 text-brand" />
+          </div>
+          <div className="flex flex-col items-center gap-1 max-w-xs">
+            <span className="text-base font-semibold text-text-primary">Your system is empty</span>
+            <span className="text-sm text-text-secondary text-center">
+              Add cameras, sensors, or accessories to start building your protection plan.
+            </span>
+          </div>
+        </div>
+      </div>
+    )
+  }
 
   return (
     <div className="rounded-[10px] bg-brand-bg p-5 xl:p-10 text-left">
