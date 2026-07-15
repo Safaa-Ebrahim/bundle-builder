@@ -17,3 +17,12 @@ export function saveSystem(data) {
     return false
   }
 }
+
+export function clearSavedSystem() {
+  try {
+    localStorage.removeItem(STORAGE_KEY)
+    return true
+  } catch {
+    return false
+  }
+}
