@@ -26,6 +26,8 @@ export default function BuilderStep({
       <button
         type="button"
         onClick={onToggle}
+        aria-expanded={isOpen}
+        aria-controls={`step-panel-${step.id}`}
         className="w-full flex flex-col gap-2 p-0 text-left transition-colors"
       >
         <div className="px-4 pb-2 pt-3 text-xs uppercase tracking-wide text-text-muted font-medium border-b border-text-secondary">
@@ -51,7 +53,7 @@ export default function BuilderStep({
       </button>
 
       {isOpen && (
-        <div className='px-4 pb-5 pt-3 flex flex-col gap-3'>
+        <div id={`step-panel-${step.id}`} role="region" className='px-4 pb-5 pt-3 flex flex-col gap-3'>
           {products?.length === 0 ? (
             <div className="flex flex-col items-center gap-3 py-10">
               <div className="w-14 h-14 rounded-full bg-white flex items-center justify-center shadow-card">
@@ -71,7 +73,7 @@ export default function BuilderStep({
                   quantities={quantities}
                   onSelectVariant={onSelectVariant}
                   onSetQty={onSetQty}
-                  showQuantity={step.id !== 'plan'}
+                  showQuantity={!product.singleSelect}
                 />
               ))}
             </div>
