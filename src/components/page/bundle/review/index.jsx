@@ -1,13 +1,11 @@
-import { useState } from 'react'
 import ReviewLineItem from './components/ReviewLineItem'
 import { formatPrice, getMonthlyFinancingEstimate } from '../../../../utils/pricing'
 import badge from '../../../../assets/satisfaction_badge.svg'
 const CATEGORY_ORDER = ['Cameras', 'Sensors', 'Accessories', 'Plan']
 
 export default function Review({ data, bundle }) {
-  const { groupedLines, totals, setQty, saveForLater, savedNotice } = bundle
+  const { groupedLines, totals, setQty, saveForLater, savedNotice, checkout, checkedOut } = bundle
   const { shipping } = data
-  const [checkedOut, setCheckedOut] = useState(false)
   const monthlyEstimate = getMonthlyFinancingEstimate(totals?.activeTotal)
 
   return (
@@ -101,7 +99,7 @@ export default function Review({ data, bundle }) {
             )}
             <button
               type="button"
-              onClick={() => setCheckedOut(true)}
+              onClick={checkout}
               className="w-full py-3 rounded-lg bg-brand text-white font-bold hover:bg-brand-hover transition-colors"
             >
               {checkedOut ? 'Order placed! 🎉' : 'Checkout'}
