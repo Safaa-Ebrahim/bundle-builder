@@ -21,6 +21,8 @@ create table if not exists public.products (
   highlight_title boolean not null default false
 );
 
+alter table public.products add column if not exists single_select boolean not null default false;
+
 create table if not exists public.variants (
   id text primary key,
   product_id text not null references public.products(id) on delete cascade,
@@ -68,15 +70,15 @@ insert into public.steps (id, step_number, title, icon) values ('sensors', 3, 'C
 insert into public.steps (id, step_number, title, icon) values ('protection', 4, 'Add extra protection', 'protection');
 
 -- products
-insert into public.products (id, step_id, category, title, description, learn_more_url, discount, billing_suffix, transparent_image, highlight_title) values ('wyze-cam-v4', 'cameras', 'Cameras', 'Wyze Cam v4', 'The clearest Wyze Cam ever made.', '#', 22, null, false, false);
-insert into public.products (id, step_id, category, title, description, learn_more_url, discount, billing_suffix, transparent_image, highlight_title) values ('wyze-cam-pan-v3', 'cameras', 'Cameras', 'Wyze Cam Pan v3', '360° pan and 180° tilt security camera.', '#', 12, null, false, false);
-insert into public.products (id, step_id, category, title, description, learn_more_url, discount, billing_suffix, transparent_image, highlight_title) values ('wyze-floodlight-v2', 'cameras', 'Cameras', 'Wyze Cam Floodlight v2', '2K floodlight camera with a 160° wide-angle view for your garage.', '#', 22, null, false, false);
-insert into public.products (id, step_id, category, title, description, learn_more_url, discount, billing_suffix, transparent_image, highlight_title) values ('wyze-doorbell', 'cameras', 'Cameras', 'Wyze Duo Cam Doorbell', 'Two cameras. Two views. Double the porch protection.', '#', null, null, false, false);
-insert into public.products (id, step_id, category, title, description, learn_more_url, discount, billing_suffix, transparent_image, highlight_title) values ('wyze-battery-cam-pro', 'cameras', 'Cameras', 'Wyze Battery Cam Pro', 'Protect anywhere. See everything in 2.5K HDR. No power outlet or electrician needed.', '#', null, null, false, false);
-insert into public.products (id, step_id, category, title, description, learn_more_url, discount, billing_suffix, transparent_image, highlight_title) values ('cam-unlimited', 'plan', 'Plan', 'Cam Unlimited', 'Unlimited cloud storage for every camera on your account.', '#', 24, '/mo', true, true);
-insert into public.products (id, step_id, category, title, description, learn_more_url, discount, billing_suffix, transparent_image, highlight_title) values ('motion-sensor', 'sensors', 'Sensors', 'Wyze Sense Motion Sensor', 'Detects motion and triggers your cameras or alarm.', '#', null, null, false, false);
-insert into public.products (id, step_id, category, title, description, learn_more_url, discount, billing_suffix, transparent_image, highlight_title) values ('sense-hub', 'sensors', 'Sensors', 'Wyze Sense Hub (Required)', 'Connects all your Wyze Sense sensors to the app.', '#', null, null, false, false);
-insert into public.products (id, step_id, category, title, description, learn_more_url, discount, billing_suffix, transparent_image, highlight_title) values ('microsd-256', 'protection', 'Accessories', 'Wyze MicroSD Card (256GB)', 'Local backup storage for your cameras.', '#', null, null, false, false);
+insert into public.products (id, step_id, category, title, description, learn_more_url, discount, billing_suffix, transparent_image, highlight_title, single_select) values ('wyze-cam-v4', 'cameras', 'Cameras', 'Wyze Cam v4', 'The clearest Wyze Cam ever made.', '#', 22, null, false, false, false);
+insert into public.products (id, step_id, category, title, description, learn_more_url, discount, billing_suffix, transparent_image, highlight_title, single_select) values ('wyze-cam-pan-v3', 'cameras', 'Cameras', 'Wyze Cam Pan v3', '360° pan and 180° tilt security camera.', '#', 12, null, false, false, false);
+insert into public.products (id, step_id, category, title, description, learn_more_url, discount, billing_suffix, transparent_image, highlight_title, single_select) values ('wyze-floodlight-v2', 'cameras', 'Cameras', 'Wyze Cam Floodlight v2', '2K floodlight camera with a 160° wide-angle view for your garage.', '#', 22, null, false, false, false);
+insert into public.products (id, step_id, category, title, description, learn_more_url, discount, billing_suffix, transparent_image, highlight_title, single_select) values ('wyze-doorbell', 'cameras', 'Cameras', 'Wyze Duo Cam Doorbell', 'Two cameras. Two views. Double the porch protection.', '#', null, null, false, false, false);
+insert into public.products (id, step_id, category, title, description, learn_more_url, discount, billing_suffix, transparent_image, highlight_title, single_select) values ('wyze-battery-cam-pro', 'cameras', 'Cameras', 'Wyze Battery Cam Pro', 'Protect anywhere. See everything in 2.5K HDR. No power outlet or electrician needed.', '#', null, null, false, false, false);
+insert into public.products (id, step_id, category, title, description, learn_more_url, discount, billing_suffix, transparent_image, highlight_title, single_select) values ('cam-unlimited', 'plan', 'Plan', 'Cam Unlimited', 'Unlimited cloud storage for every camera on your account.', '#', 24, '/mo', true, true, true);
+insert into public.products (id, step_id, category, title, description, learn_more_url, discount, billing_suffix, transparent_image, highlight_title, single_select) values ('motion-sensor', 'sensors', 'Sensors', 'Wyze Sense Motion Sensor', 'Detects motion and triggers your cameras or alarm.', '#', null, null, false, false, false);
+insert into public.products (id, step_id, category, title, description, learn_more_url, discount, billing_suffix, transparent_image, highlight_title, single_select) values ('sense-hub', 'sensors', 'Sensors', 'Wyze Sense Hub (Required)', 'Connects all your Wyze Sense sensors to the app.', '#', null, null, false, false, false);
+insert into public.products (id, step_id, category, title, description, learn_more_url, discount, billing_suffix, transparent_image, highlight_title, single_select) values ('microsd-256', 'protection', 'Accessories', 'Wyze MicroSD Card (256GB)', 'Local backup storage for your cameras.', '#', null, null, false, false, false);
 
 -- variants
 insert into public.variants (id, product_id, label, swatch, image, price, default_qty, stock) values ('wyze-cam-v4-white', 'wyze-cam-v4', 'White', '#f2f2f2', 'https://ytmnxgsglijfjrjpnduq.supabase.co/storage/v1/object/public/product-images/cam-v4.png', 35.98, 1, 8);
@@ -98,3 +100,4 @@ insert into public.variants (id, product_id, label, swatch, image, price, defaul
 insert into public.shipping_options (id, label, price, discount, image, is_default, sort_order) values ('fast-shipping', 'Fast Shipping', 5.99, 100, 'https://ytmnxgsglijfjrjpnduq.supabase.co/storage/v1/object/public/product-images/carbon_delivery.svg', true, 0);
 
 -- settings
+insert into public.app_settings (key, value) values ('financing', '{"months":12}'::jsonb);
