@@ -32,22 +32,24 @@ export function useBundle(data) {
   const products = useMemo(() => getAllProducts(data), [data])
   const shippingOptions = data.shippingOptions ?? []
 
+  // Read localStorage once; both initializers below reuse this instead of
+  // each parsing the same saved blob independently.
+  const savedOnMount = useMemo(() => loadSavedSystem(), [])
+
   const [{ quantities, activeVariant }, setState] = useState(() => {
     const seeded = seedState(products)
-    const saved = loadSavedSystem()
-    if (saved) {
+    if (savedOnMount) {
       return {
-        quantities: { ...seeded.quantities, ...saved.quantities },
-        activeVariant: { ...seeded.activeVariant, ...saved.activeVariant },
+        quantities: { ...seeded.quantities, ...savedOnMount.quantities },
+        activeVariant: { ...seeded.activeVariant, ...savedOnMount.activeVariant },
       }
     }
     return seeded
   })
 
-  const [selectedShippingId, setSelectedShippingId] = useState(() => {
-    const saved = loadSavedSystem()
-    return saved?.selectedShippingId ?? defaultShippingOptionId(shippingOptions)
-  })
+  const [selectedShippingId, setSelectedShippingId] = useState(
+    () => savedOnMount?.selectedShippingId ?? defaultShippingOptionId(shippingOptions),
+  )
 
   const [openStep, setOpenStep] = useState(data.steps[0]?.id ?? null)
   const [savedNotice, setSavedNotice] = useState(false)
