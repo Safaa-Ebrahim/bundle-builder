@@ -1,0 +1,121 @@
+import { useState } from 'react'
+import ReviewLineItem from './components/ReviewLineItem'
+import { formatPrice } from '../../../../utils/pricing'
+import badge from '../../../../assets/satisfaction_badge.svg'
+const CATEGORY_ORDER = ['Cameras', 'Sensors', 'Accessories', 'Plan']
+
+export default function Review({ data, bundle }) {
+  const { groupedLines, totals, setQty, saveForLater, savedNotice } = bundle
+  const { shipping, financing } = data
+  const [checkedOut, setCheckedOut] = useState(false)
+
+  return (
+    <div className="rounded-[10px] bg-brand-bg p-5 sm:p-6 text-left">
+      <div className="text-xs uppercase tracking-wide text-text-muted xl:hidden">Review</div>
+
+      <div className='flex flex-col xl:flex-row gap-3 xl:gap-12'>
+        <div className='flex flex-col gap-2.5'>
+          {/* title, discription */}
+          <div className="flex flex-col gap-1">
+            <h2 className="text-xl xl:text-2xl font-semibold text-text-secondary">Your security system</h2>
+            <p className="text-xs lg:text-s xl:text-base text-text-secondary/75">
+              Review your personalized protection system designed to keep what matters most safe.
+            </p>
+          </div>
+          <div className="divide-y divide-border-strong border-t border-border-strong">
+            {/* products */}
+            {CATEGORY_ORDER.filter((cat) => groupedLines.has(cat)).map((category) => (
+              <div key={category} className="py-3 space-y-2">
+                <div className="text-xs uppercase tracking-wide text-blue-gray">
+                  {category}
+                </div>
+                {/* items */}
+                <div className="space-y-3">
+                  {groupedLines.get(category).map(({ product, variant, qty }) => (
+                    <ReviewLineItem
+                      key={variant.id}
+                      product={product}
+                      variant={variant}
+                      qty={qty}
+                      onSetQty={setQty}
+                    />
+                  ))}
+                </div>
+              </div>
+            ))}
+            {/* plan */}
+
+            {/* shipping */}
+            <div className="pt-3">
+              <ReviewLineItem
+                product={{ title: shipping.label, discount: shipping.discount }}
+                variant={{ id: 'shipping', image: shipping.image, price: shipping.price }}
+                qty={1}
+                showQuantity={false}
+              />
+            </div>
+          </div>
+        </div>
+
+        <div className='flex flex-col gap-2'>
+
+          <div className='flex items-center justify-between xl:flex-col xl:justify-start xl:gap-4 xl:items-start'>
+            <div className='flex items-center gap-6'>
+              <img src={badge} className='object-contain w-25 h-25' />
+              <div className='hidden xl:flex flex-col text-lg text-text-secondary h-20 justify-between'>
+                <span className='font-semibold'>
+                  30-day hassle-free returns
+                </span>
+                <span>
+                  If you're not totally in love with the product, we will refund you 100%.
+                </span>
+              </div>
+            </div>
+
+            <div className="flex flex-col gap-2 xl:flex-row xl:justify-between items-end xl:items-start xl:w-full">
+              <span className="w-fit text-xs xl:text-base font-medium bg-brand text-white rounded px-2 py-1">
+                {financing.label}
+              </span>
+              <div className="flex items-baseline gap-2">
+                <span className="text-icon-muted line-through text-lg xl:text-xl font-medium">
+                  {formatPrice(totals?.compareAtTotal)}
+                </span>
+                <span className="text-xl xl:text-2xl font-bold text-brand">
+                  {formatPrice(totals?.activeTotal)}
+                </span>
+              </div>
+            </div>
+
+          </div>
+
+
+          <div className='space-y-1 mt-3'>
+
+            {/* saving price */}
+            {totals?.savings > 0 && (
+              <div className="text-variant-selected-border text-xs xl:text-sm font-semibold text-center">
+                Congrats! You're saving {formatPrice(totals?.savings)} on your security bundle!
+              </div>
+            )}
+            <button
+              type="button"
+              onClick={() => setCheckedOut(true)}
+              className="w-full py-3 rounded-lg bg-brand text-white font-bold hover:bg-brand-hover transition-colors"
+            >
+              {checkedOut ? 'Order placed! 🎉' : 'Checkout'}
+            </button>
+          </div>
+
+          <button
+            type="button"
+            onClick={saveForLater}
+            className="w-full text-center text-sm text-text-muted underline underline-offset"
+          >
+            {savedNotice ? 'Saved!' : 'Save my system for later'}
+          </button>
+        </div>
+
+      </div>
+    </div>
+  )
+}
