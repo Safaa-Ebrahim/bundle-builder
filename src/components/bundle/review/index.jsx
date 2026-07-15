@@ -7,7 +7,7 @@ import { formatPrice, getMonthlyFinancingEstimate } from '../../../utils/pricing
 import badge from './../../../assets/satisfaction_badge.svg'
 const CATEGORY_ORDER = ['Cameras', 'Sensors', 'Accessories', 'Plan']
 
-export default function Review({ bundle }) {
+export default function Review({ data, bundle }) {
   const {
     groupedLines,
     reviewLines,
@@ -22,7 +22,7 @@ export default function Review({ bundle }) {
     selectedShipping,
     selectShippingOption,
   } = bundle
-  const monthlyEstimate = getMonthlyFinancingEstimate(totals?.activeTotal)
+  const monthlyEstimate = getMonthlyFinancingEstimate(totals?.activeTotal, data?.financing?.months)
   const [confirmingCheckout, setConfirmingCheckout] = useState(false)
   const isEmpty = reviewLines.length === 0
 
@@ -84,7 +84,7 @@ export default function Review({ bundle }) {
                       variant={variant}
                       qty={qty}
                       onSetQty={setQty}
-                      showQuantity={category !== 'Plan'}
+                      showQuantity={!product.singleSelect}
                     />
                   ))}
                 </div>
