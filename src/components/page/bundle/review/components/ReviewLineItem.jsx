@@ -7,13 +7,26 @@ export default function ReviewLineItem({ product, variant, qty, onSetQty, showQu
   const lineTotal = priceAfterDiscount * qty
   const compareAtTotal = variant.price * qty
   const onSale = priceAfterDiscount < variant.price
+  const [firstWord, ...restWords] = product.title.split(' ')
 
   return (
     <div className="flex items-center gap-3">
-      <ProductImage src={variant.image} alt={product.title} className="w-10 h-10 shrink-0" />
+      <ProductImage
+        src={variant.image}
+        alt={product.title}
+        className="w-10 h-10 shrink-0"
+        bg={!product?.transparentImage}
+      />
       <div className="flex-1 min-w-0 text-left">
         <div className="text-xs lg:text-sm xl:text-lg text-text-primary truncate">
-          {product.title}
+          {product?.highlightTitle ? (
+            <>
+              <span className="font-bold text-text-primary">{firstWord}</span>{' '}
+              <span className="font-bold text-brand">{restWords.join(' ')}</span>
+            </>
+          ) : (
+            product?.title
+          )}
           {variant.label ? ` (${variant.label})` : ''}
         </div>
       </div>
