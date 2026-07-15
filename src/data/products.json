@@ -269,13 +269,9 @@
   ],
   "shipping": {
     "label": "Fast Shipping",
-    "compareAtPrice": 5.99,
-    "price": 0
-  },
-  "guarantee": {
-    "badgeLabel": "100% Satisfaction Guarantee",
-    "title": "30-day hassle-free returns",
-    "description": "If you're not totally in love with the product, we will refund you 100%."
+    "price": 5.99,
+    "discount": 100,
+    "image": "img/carbon_delivery.svg"
   },
   "financing": {
     "label": "as low as $19.19/mo"
