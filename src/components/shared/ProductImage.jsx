@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-export default function ProductImage({ src, alt, className = '' }) {
+export default function ProductImage({ src, alt, className = '', bg = true }) {
   const [failed, setFailed] = useState(false)
 
   if (!src || failed) {
@@ -18,7 +18,7 @@ export default function ProductImage({ src, alt, className = '' }) {
     <img
       src={src}
       alt={alt}
-      className={`object-contain rounded-md bg-white ${className}`}
+      className={`object-contain rounded-md ${bg ? 'bg-white' : ''} ${className}`}
       onError={() => setFailed(true)}
     />
   )
