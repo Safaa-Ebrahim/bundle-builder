@@ -10,6 +10,13 @@ export function getPriceAfterDiscount(price, discountPercent) {
   return price * (1 - discountPercent / 100)
 }
 
+// Single source of truth for "is this on sale" — used anywhere a price and
+// its discounted price are shown side by side (product cards, review lines).
+export function getSaleInfo(price, discountPercent) {
+  const finalPrice = getPriceAfterDiscount(price, discountPercent)
+  return { finalPrice, onSale: finalPrice < price }
+}
+
 export function buildReviewLines(products, quantities) {
   const lines = []
   for (const product of products) {
