@@ -41,6 +41,8 @@ create table if not exists public.products (
   highlight_title boolean not null default false
 );
 
+alter table public.products add column if not exists single_select boolean not null default false;
+
 create table if not exists public.variants (
   id text primary key,
   product_id text not null references public.products(id) on delete cascade,
@@ -102,7 +104,7 @@ const allProducts = PRODUCT_TABLES.flatMap((key) => data[key] ?? [])
 for (const product of allProducts) {
   const stepId = stepIdByProductId[product.id]
   lines.push(
-    `insert into public.products (id, step_id, category, title, description, learn_more_url, discount, billing_suffix, transparent_image, highlight_title) values (${sqlStr(product.id)}, ${sqlStr(stepId)}, ${sqlStr(product.category)}, ${sqlStr(product.title)}, ${sqlStr(product.description)}, ${sqlStr(product.learnMoreUrl)}, ${sqlNum(product.discount)}, ${sqlStr(product.billingSuffix)}, ${sqlBool(product.transparentImage)}, ${sqlBool(product.highlightTitle)});`,
+    `insert into public.products (id, step_id, category, title, description, learn_more_url, discount, billing_suffix, transparent_image, highlight_title, single_select) values (${sqlStr(product.id)}, ${sqlStr(stepId)}, ${sqlStr(product.category)}, ${sqlStr(product.title)}, ${sqlStr(product.description)}, ${sqlStr(product.learnMoreUrl)}, ${sqlNum(product.discount)}, ${sqlStr(product.billingSuffix)}, ${sqlBool(product.transparentImage)}, ${sqlBool(product.highlightTitle)}, ${sqlBool(product.singleSelect)});`,
   )
 }
 
