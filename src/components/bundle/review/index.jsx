@@ -7,10 +7,21 @@ import { formatPrice, getMonthlyFinancingEstimate } from '../../../utils/pricing
 import badge from './../../../assets/satisfaction_badge.svg'
 const CATEGORY_ORDER = ['Cameras', 'Sensors', 'Accessories', 'Plan']
 
-export default function Review({ data, bundle }) {
-  const { groupedLines, reviewLines, totals, setQty, saveForLater, savedNotice, checkout, checkedOut } =
-    bundle
-  const { shipping } = data
+export default function Review({ bundle }) {
+  const {
+    groupedLines,
+    reviewLines,
+    totals,
+    setQty,
+    saveForLater,
+    savedNotice,
+    checkout,
+    checkedOut,
+    shippingOptions,
+    selectedShippingId,
+    selectedShipping,
+    selectShippingOption,
+  } = bundle
   const monthlyEstimate = getMonthlyFinancingEstimate(totals?.activeTotal)
   const [confirmingCheckout, setConfirmingCheckout] = useState(false)
   const isEmpty = reviewLines.length === 0
@@ -83,12 +94,40 @@ export default function Review({ data, bundle }) {
 
             {/* shipping */}
             <div className="pt-3">
-              <ReviewLineItem
-                product={{ title: shipping.label, discount: shipping.discount }}
-                variant={{ id: 'shipping', image: shipping.image, price: shipping.price }}
-                qty={1}
-                showQuantity={false}
-              />
+              {shippingOptions.length > 1 ? (
+                <div className="flex flex-col gap-2">
+                  <div className="text-xs uppercase tracking-wide text-blue-gray">Shipping</div>
+                  {shippingOptions.map((option) => {
+                    const isActive = option.id === selectedShippingId
+                    return (
+                      <button
+                        key={option.id}
+                        type="button"
+                        onClick={() => selectShippingOption(option.id)}
+                        aria-pressed={isActive}
+                        className={`flex items-center justify-between gap-3 px-3 py-2 rounded-lg border text-sm transition-colors ${isActive
+                            ? 'border-variant-selected-border bg-variant-selected-bg text-text-primary font-medium'
+                            : 'border-border text-text-secondary hover:border-brand'
+                          }`}
+                      >
+                        <span>{option.label}</span>
+                        <span className="font-semibold text-brand">
+                          {option.price === 0 ? 'FREE' : formatPrice(option.price)}
+                        </span>
+                      </button>
+                    )
+                  })}
+                </div>
+              ) : (
+                selectedShipping && (
+                  <ReviewLineItem
+                    product={{ title: selectedShipping.label, discount: selectedShipping.discount }}
+                    variant={{ id: 'shipping', image: selectedShipping.image, price: selectedShipping.price }}
+                    qty={1}
+                    showQuantity={false}
+                  />
+                )
+              )}
             </div>
           </div>
         </div>
