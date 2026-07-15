@@ -26,7 +26,7 @@ export default function ProductCard({
       {/* image and discout */}
       <div className="relative">
         {product?.discount > 0 && (
-          <span className="absolute -top-2.5 left-0 bg-brand text-white text-xs font-semibold px-2 py-0.5 rounded-full z-10">
+          <span className="absolute top-1 left-1 sm:-top-2.5 sm:left-0 bg-brand text-white text-[10px] xl:text-xs font-semibold px-1.5 xl:px-2 py-0.5 rounded-full z-10 whitespace-nowrap">
             Save {product?.discount}%
           </span>
         )}
