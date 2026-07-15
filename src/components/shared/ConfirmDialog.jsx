@@ -1,3 +1,5 @@
+import { useEffect, useRef } from 'react'
+
 export default function ConfirmDialog({
   open,
   title,
@@ -7,6 +9,45 @@ export default function ConfirmDialog({
   onConfirm,
   onCancel,
 }) {
+  const dialogRef = useRef(null)
+  const cancelButtonRef = useRef(null)
+  const previouslyFocusedRef = useRef(null)
+
+  useEffect(() => {
+    if (!open) return
+
+    previouslyFocusedRef.current = document.activeElement
+    cancelButtonRef.current?.focus()
+
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') {
+        onCancel?.()
+        return
+      }
+
+      if (e.key === 'Tab') {
+        const focusable = dialogRef.current?.querySelectorAll('button, [href], input, select, textarea')
+        if (!focusable?.length) return
+        const first = focusable[0]
+        const last = focusable[focusable.length - 1]
+
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault()
+          last.focus()
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault()
+          first.focus()
+        }
+      }
+    }
+
+    document.addEventListener('keydown', handleKeyDown)
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown)
+      previouslyFocusedRef.current?.focus?.()
+    }
+  }, [open, onCancel])
+
   if (!open) return null
 
   return (
@@ -18,6 +59,7 @@ export default function ConfirmDialog({
       onClick={onCancel}
     >
       <div
+        ref={dialogRef}
         className="w-full max-w-sm rounded-xl bg-bg p-6 text-left shadow-card"
         onClick={(e) => e.stopPropagation()}
       >
@@ -29,6 +71,7 @@ export default function ConfirmDialog({
         )}
         <div className="flex items-center gap-3 mt-5">
           <button
+            ref={cancelButtonRef}
             type="button"
             onClick={onCancel}
             className="flex-1 py-2.5 rounded-lg border border-border text-text-primary font-medium hover:border-brand transition-colors"
