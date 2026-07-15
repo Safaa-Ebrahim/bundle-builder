@@ -193,6 +193,8 @@
       "learnMoreUrl": "#",
       "discount": 24,
       "billingSuffix": "/mo",
+      "transparentImage": true,
+      "highlightTitle": true,
       "variants": [
         {
           "id": "cam-unlimited-default",
