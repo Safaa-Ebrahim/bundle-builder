@@ -1,7 +1,8 @@
 import ProductImage from '../../../shared/ProductImage'
 import VariantSelector from './VariantSelector'
 import QuantityStepper from '../../../shared/QuantityStepper'
-import { formatPrice, getPriceAfterDiscount } from '../../../../utils/pricing'
+import { formatPrice, getSaleInfo } from '../../../../utils/pricing'
+import { splitHighlightTitle } from '../../../../utils/text'
 
 export default function ProductCard({
   product,
@@ -15,8 +16,8 @@ export default function ProductCard({
     product.variants.find((v) => v.id === activeVariantId) ?? product.variants[0]
   const qty = quantities[activeVariant.id] ?? 0
   const selected = qty > 0
-  const priceAfterDiscount = getPriceAfterDiscount(activeVariant.price, product.discount)
-  const onSale = priceAfterDiscount < activeVariant.price
+  const { finalPrice: priceAfterDiscount, onSale } = getSaleInfo(activeVariant.price, product.discount)
+  const [firstWord, restWords] = splitHighlightTitle(product.title)
 
   return (
     <div
@@ -31,6 +32,7 @@ export default function ProductCard({
           </span>
         )}
         <ProductImage
+          key={activeVariant?.id}
           src={activeVariant?.image}
           alt={product?.title}
           className="w-25 h-25 xl:w-full shrink-0"
@@ -43,10 +45,8 @@ export default function ProductCard({
           <h3 className="text-sm font-semibold text-text-primary">
             {product.highlightTitle ? (
               <>
-                <span className="text-text-primary">{product.title.split(' ')[0]}</span>{' '}
-                <span className="text-brand">
-                  {product.title.split(' ').slice(1).join(' ')}
-                </span>
+                <span className="text-text-primary">{firstWord}</span>{' '}
+                <span className="text-brand">{restWords}</span>
               </>
             ) : (
               product.title
@@ -79,11 +79,10 @@ export default function ProductCard({
             <button
               type="button"
               onClick={() => onSetQty(activeVariant.id, selected ? 0 : 1)}
-              className={`px-4 py-1.5 rounded-md text-sm font-semibold transition-colors ${
-                selected
+              className={`px-4 py-1.5 rounded-md text-sm font-semibold transition-colors ${selected
                   ? 'bg-brand text-white'
                   : 'bg-surface text-text-primary hover:border-brand border border-border'
-              }`}
+                }`}
             >
               {selected ? 'Selected' : 'Select'}
             </button>
