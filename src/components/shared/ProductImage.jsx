@@ -18,7 +18,7 @@ export default function ProductImage({ src, alt, className = '' }) {
     <img
       src={src}
       alt={alt}
-      className={`object-contain rounded-md ${className}`}
+      className={`object-contain rounded-md bg-white ${className}`}
       onError={() => setFailed(true)}
     />
   )
