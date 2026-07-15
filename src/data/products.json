@@ -195,6 +195,7 @@
       "billingSuffix": "/mo",
       "transparentImage": true,
       "highlightTitle": true,
+      "singleSelect": true,
       "variants": [
         {
           "id": "cam-unlimited-default",
@@ -279,5 +280,8 @@
       "isDefault": true,
       "sortOrder": 0
     }
-  ]
+  ],
+  "financing": {
+    "months": 12
+  }
 }
