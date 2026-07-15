@@ -30,12 +30,28 @@ export default function ProductCard({
             Save {product?.discount}%
           </span>
         )}
-        <ProductImage src={activeVariant?.image} alt={product?.title} className="w-25 h-25 xl:w-full shrink-0" />
+        <ProductImage
+          src={activeVariant?.image}
+          alt={product?.title}
+          className="w-25 h-25 xl:w-full shrink-0"
+          bg={!product.transparentImage}
+        />
       </div>
       <div className='flex flex-col gap-2.5'>
         {/* title, discription */}
         <div className='flex flex-col gap-2'>
-          <h3 className="text-sm font-semibold text-text-primary">{product.title}</h3>
+          <h3 className="text-sm font-semibold text-text-primary">
+            {product.highlightTitle ? (
+              <>
+                <span className="text-text-primary">{product.title.split(' ')[0]}</span>{' '}
+                <span className="text-brand">
+                  {product.title.split(' ').slice(1).join(' ')}
+                </span>
+              </>
+            ) : (
+              product.title
+            )}
+          </h3>
           <p className="text-xs text-text-secondary/75 font-medium">
             {product?.description}{' '}
             {product?.learnMoreUrl && (
