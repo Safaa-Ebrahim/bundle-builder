@@ -54,6 +54,11 @@ export function computeTotals(lines, shipping) {
   }
 }
 
+export function getMonthlyFinancingEstimate(total, months = 12) {
+  if (!months) return total
+  return total / months
+}
+
 export function countSelectedProducts(products, productIds, quantities) {
   return productIds.filter((id) => {
     const product = products.find((p) => p.id === id)
